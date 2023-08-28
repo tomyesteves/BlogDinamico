@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<%const title = "Una Hoja de Vida";%>
+<%- include('head.ejs', {title}); -%>
+
+<body>
+    <nav>
+        <h1> Hoja de vida </h1>
+        <a href="/gotoindex">Blog</a>
+        <a href="/gotocv">About me</a>
+    </nav>
+    <main>
+        <% aboutMeData.articles.forEach(function(article) { %>
+        <section>
+            <header>
+                <h2><%- article.header %></h2>
+            </header>
+            <article>
+                <%- article.content %>
+            </article>
+            <footer>
+                By <b><%- article.author %></b>
+            </footer>
+        </section>
+        <% }); %>
+    </main>
+</body>
+</html>

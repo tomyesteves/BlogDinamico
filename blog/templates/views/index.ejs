@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<%const title = "Un blog";%>
+<%- include('head.ejs', {title}); -%>
+
+<body>
+    <nav>
+        <h1>Bienvenidos a mi blog</h1>
+        <a href="/gotoindex">Blog</a>
+        <a href="/gotocv">About me</a>
+    </nav>
+    <main>
+        <% indexData.articles.forEach(function(article) { %>
+        <article>
+            <header>
+                <h2><%- article.title %></h2>
+            </header>
+            <section>
+                <%- article.content %>
+            </section>
+            <footer>
+                By <b><%- article.author %></b>
+            </footer>
+        </article>
+        <hr>
+        <% }); %>
+        <footer>
+            &copy; Ejemplo para incluir la mayor cantidad posible de etiquetas HTML
+        </footer>
+    </main>
+</body>
+</html>
