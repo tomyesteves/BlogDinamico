@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-
 <%const title = "Una Hoja de Vida";%>
 <%- include('head.ejs', {title}); -%>
 
 <body>
-    <nav>
-        <h1> Hoja de vida </h1>
-        <a href="/gotoindex">Blog</a>
-        <a href="/gotocv">About me</a>
-    </nav>
+    <%- include('nav.ejs'); -%>
     <main>
         <% aboutMeData.articles.forEach(function(article) { %>
         <section>

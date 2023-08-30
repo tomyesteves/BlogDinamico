@@ -1,0 +1,20 @@
+<%const title = "Form post";%>
+<%- include('head.ejs', {title}); -%>
+
+<body>
+    <%- include('nav.ejs'); -%>
+    <main>
+        <h1> <%- formData.formTitle %> </h1>
+        <form action="/dinamico/post" method="POST">
+            <% formData.campos.forEach(function(campo) { %>
+                <%- campo.label %>
+                <%- campo.input %>
+            <% }); %>
+            <%- formData.button %>
+        </form>
+        <footer>
+            <%- formData.footer %>
+        </footer>
+    </main>
+</body>
+</html>
