@@ -1,20 +1,16 @@
 import { pool } from '../dbconnection.js'
 
-export async function addPost(title, contentlines, img, author) {
-    console.log("trace 1");
+export async function addPost(title, description, img, alt, body, author) {
     try {
-        console.log("trace 2");
-        console.log(pool);
         const result = await pool.query(
             `INSERT INTO posts
-            (title, contentlines, img, author)
-            VALUES ($1, $2, $3, $4) RETURNING *;`,
-            [title, contentlines, img, author]
+            (title, description, img, alt, body, author)
+            VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;`,
+            [title, description, img, alt, body, author]
         );
-        console.log("trace 3");
         return result.rows[0];
     } catch (err) {
-        console.log("ERROR -> " + err.message)
+        console.log("ERROR -> " + err.message);
         return null;
     }
 }

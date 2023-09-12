@@ -4,16 +4,21 @@
 <body>
     <%- include('nav.ejs'); -%>
     <main>
-        <% indexData.articles.forEach(function(article) { %>
+        <% articles.forEach(function(article) { %>
         <article>
             <header>
-                <h2><%- article.title %></h2>
+                <h2> <%- article.titulo %> </h2>
             </header>
             <section>
-                <%- article.content %>
+                <p> <%- article.descripcion %> </p>
+                <% if (article.imagen) {%>
+                    <img src=<%= article.imagen %> alt=<%= article.alt %>/>
+                <%}%>
+                <br>
+                <%- article.cuerpo %>
             </section>
             <footer>
-                By <b><%- article.author %></b>
+                By <b><%- article.autor %></b>
             </footer>
         </article>
         <hr>

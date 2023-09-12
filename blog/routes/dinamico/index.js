@@ -1,11 +1,12 @@
-import { indexData } from '../../templates/data/indexData.js'
 import { aboutMeData } from '../../templates/data/aboutMe.js'
 import { formData } from '../../templates/data/form.js'
 import { addPost } from '../../crud/addPost.js'
+import { getPosts } from '../../crud/getPosts.js'
 
 export default async function (fastify, opts) {
     fastify.get('/', async function (request, reply) {
-        return reply.view("templates/views/index.ejs", { indexData })
+        const articles = await getPosts();
+        return reply.view("templates/views/index.ejs", { articles })
     });
 
     fastify.get('/aboutme', async function (request, reply) {
@@ -17,15 +18,17 @@ export default async function (fastify, opts) {
     });
 
     fastify.post('/post', async function (request, reply) {
+        console.log("requestbody", request.body);
         const newPost = {
             title: request.body.titulo,
-            content: request.body.contenido,
+            description: request.body.descripcion,
+            img: request.body.imagen,
+            alt: request.body.alternativo,
+            body: request.body.cuerpo,
             author: request.body.autor
-        }
-        indexData.articles.push(newPost);
-        console.log("Antes de guardar en la bd");
-        addPost(newPost.title, newPost.content, request.body.imagen, newPost.author);
-        console.log("Despues de guardar en la bd");
+        };
+        console.log("newpost", newPost)
+        addPost(newPost.title, newPost.description, newPost.img, newPost.alt, newPost.body, newPost.author);
         return reply.redirect('/dinamico');
     });
 }
